@@ -1,0 +1,47 @@
+server:
+port: ${PORT:8083}
+servlet:
+context-path: /internal
+
+
+spring:
+datasource:
+url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:categorization}
+username: ${DB_USER:postgres}
+password: ${DB_PASSWORD:postgres}
+jpa:
+hibernate:
+ddl-auto: validate
+open-in-view: false
+properties:
+hibernate.format_sql: true
+flyway:
+enabled: true
+
+
+security:
+jwt:
+# Set by Auth Service. For dev you can use HMAC via shared secret; prod should use RS256 and JWKS.
+algorithm: ${JWT_ALG:HS256}
+hmacSecret: ${JWT_SECRET:dev-local-secret}
+issuer: ${JWT_ISSUER:http://auth:8081}
+audience: categorization-service
+required-role: internal-service
+
+
+clients:
+transactions:
+base-url: ${TX_BASE_URL:http://transactions:8085/internal}
+
+
+management:
+endpoints:
+web:
+exposure:
+include: health,info
+
+
+springdoc:
+api-docs:
+path: /v3/api-docs
+swagger-ui:

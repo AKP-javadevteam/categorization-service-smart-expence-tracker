@@ -1,0 +1,31 @@
+version: "3.9"
+services:
+  categorization-service:
+    build: .
+    container_name: categorization-service
+    ports:
+      - "${CATEGORIZATION_SERVICE_PORT}:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8084
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://categorization-db:5432/${POSTGRES_DB}
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - categorization-db
+
+  categorization-db:
+    image: postgres:15
+    container_name: categorization-db
+    restart: always
+    environment:
+      POSTGRES_DB=${POSTGRES_DB}
+      POSTGRES_USER=${POSTGRES_USER}
+      POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - categorization_db_data:/var/lib/postgresql/data
+
+volumes:
+  categorization_db_data:
