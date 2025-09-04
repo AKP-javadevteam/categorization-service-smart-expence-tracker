@@ -1,38 +1,31 @@
 package com.smartexpense.categorization.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Table(name = "rules")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "categorization_rules")
 public class Rule {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Pattern or keyword to match transaction descriptions or merchants.
-     * Example: "%Starbucks%", "%Uber%"
-     */
+    // pattern to match - plain substring match for MVP (case-insensitive)
     @Column(nullable = false)
     private String pattern;
 
-    /**
-     * Normalized category that this rule maps to.
-     * Example: "Food & Drink", "Transport"
-     */
     @Column(nullable = false)
     private String category;
 
-    /**
-     * Optional sub-category.
-     * Example: "Coffee Shops" under "Food & Drink"
-     */
     private String subCategory;
+
+    // getters/setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getPattern() { return pattern; }
+    public void setPattern(String pattern) { this.pattern = pattern; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+    public String getSubCategory() { return subCategory; }
+    public void setSubCategory(String subCategory) { this.subCategory = subCategory; }
 }
+

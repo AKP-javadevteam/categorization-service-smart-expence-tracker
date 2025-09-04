@@ -30,7 +30,7 @@ public class Transaction {
     private String description;
 
     /**
-     * Merchant Category Code (MCC), optional but useful for classification.
+     * Merchant Category Code (MCC)- for classification.
      */
     private String mcc;
 
@@ -45,7 +45,7 @@ public class Transaction {
     private String category;
 
     /**
-     * Sub-category (if applicable).
+     * Sub-category (check with team).
      */
     private String subCategory;
 
@@ -58,5 +58,4 @@ public class Transaction {
      * Timestamp of when categorization was last updated.
      */
     private LocalDateTime updatedAt;
-
 }
