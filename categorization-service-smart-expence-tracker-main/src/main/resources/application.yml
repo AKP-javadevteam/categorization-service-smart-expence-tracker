@@ -1,5 +1,5 @@
 server:
-port: ${PORT:8083}
+port: ${PORT:8084}
 servlet:
 context-path: /internal
 
@@ -21,7 +21,7 @@ enabled: true
 
 security:
 jwt:
-# Set by Auth Service. For dev you can use HMAC via shared secret; prod should use RS256 and JWKS.
+# Set by Auth Service.
 algorithm: ${JWT_ALG:HS256}
 hmacSecret: ${JWT_SECRET:dev-local-secret}
 issuer: ${JWT_ISSUER:http://auth:8081}
@@ -31,7 +31,7 @@ required-role: internal-service
 
 clients:
 transactions:
-base-url: ${TX_BASE_URL:http://transactions:8085/internal}
+base-url: ${TX_BASE_URL:http://transactions:8083/internal}
 
 
 management:

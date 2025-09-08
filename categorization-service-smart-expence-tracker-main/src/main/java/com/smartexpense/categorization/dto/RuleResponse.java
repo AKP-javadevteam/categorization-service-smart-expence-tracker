@@ -1,24 +1,12 @@
-package com.smartexpense.categorization.model;
+package com.smartexpense.categorization.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "categorization_rules")
-public class Rule {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RuleResponse {
     private Long id;
-
-    // pattern to match - plain substring match for MVP (case-insensitive)
-    @Column(nullable = false)
     private String pattern;
-
-    @Column(nullable = false)
     private String category;
-
     private String subCategory;
+    private Integer priority;
 
-    // getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getPattern() { return pattern; }
@@ -27,5 +15,8 @@ public class Rule {
     public void setCategory(String category) { this.category = category; }
     public String getSubCategory() { return subCategory; }
     public void setSubCategory(String subCategory) { this.subCategory = subCategory; }
+    public Integer getPriority() { return priority; }
+    public void setPriority(Integer priority) { this.priority = priority; }
 }
+
 

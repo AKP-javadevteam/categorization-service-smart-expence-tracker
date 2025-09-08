@@ -58,4 +58,12 @@ public class Transaction {
      * Timestamp of when categorization was last updated.
      */
     private LocalDateTime updatedAt;
+
+    public boolean isMatched() {
+        return false;
+    }
+
+    public long getRuleId() {
+        return 0;
+    }
 }

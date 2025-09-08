@@ -1,0 +1,19 @@
+create table if not exists category (
+ id bigserial primary key,
+ code varchar(64) not null unique,
+ name varchar(128) not null
+ );
+
+
+ create table if not exists subcategory (
+ id bigserial primary key,
+ category_id bigint not null references category(id) on delete cascade,
+ code varchar(64) not null,
+ name varchar(128) not null,
+ unique(category_id, code)
+ );
+
+
+ insert into category(code, name) values
+ ('income','Income'),('housing','Housing'),('food','Food'),('transport','Transport'),
+ ('shopping','Shopping'),('entertainment','Entertainment'),('health','Health'),('other','Other');
