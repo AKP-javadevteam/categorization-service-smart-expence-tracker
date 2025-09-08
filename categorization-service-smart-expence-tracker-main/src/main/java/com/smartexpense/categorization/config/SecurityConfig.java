@@ -1,5 +1,6 @@
 package com.smartexpense.categorization.config;
 
+import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +15,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
-public class SecurityConfig {
+public class SecurityConfig<JwtAuthFilter> {
 
 
     @Value("${security.jwt.required-role}")
     private String requiredRole;
 
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return filterChain(http, null);
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
@@ -31,7 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/categories/**").hasAuthority(requiredRole)
                         .anyRequest().hasAuthority(requiredRole)
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore((Filter) jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }

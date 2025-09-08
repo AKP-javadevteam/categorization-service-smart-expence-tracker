@@ -1,5 +1,9 @@
 package com.smartexpense.categorization.dto;
 
+import org.springframework.http.ResponseEntity;
+
+import java.util.Optional;
+
 public class RuleResponse {
     private Long id;
     private String pattern;
@@ -17,6 +21,9 @@ public class RuleResponse {
     public void setSubCategory(String subCategory) { this.subCategory = subCategory; }
     public Integer getPriority() { return priority; }
     public void setPriority(Integer priority) { this.priority = priority; }
+
+    public Optional<ResponseEntity<Object>> map(Object o) {
+    }
 }
 
 

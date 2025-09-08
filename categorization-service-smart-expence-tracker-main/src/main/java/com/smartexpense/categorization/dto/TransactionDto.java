@@ -1,4 +1,4 @@
-package com.smartexpense.categorization.Util;
+package com.smartexpense.categorization.dto;
 
 import lombok.*;
 
@@ -16,6 +16,7 @@ public class TransactionDto {
     private BigDecimal amount;
     private LocalDate date;
 
-    private String categoryCode;    // output after categorization
+    private String categoryCode;
     private String subcategoryCode;
 }
+
