@@ -1,0 +1,4 @@
+package com.smartexpense.categorization.domain;
+
+public class Category {
+}
